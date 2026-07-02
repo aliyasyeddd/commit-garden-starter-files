@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Commit Garden</title>
+  </head>
+  <body>
+    <!--  APP -->
+    <div class="app">
+      <!--  SIDEBAR  -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">🌱</div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-btn" onclick="showPage('info')" title="info">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>Info</span>
+          </button>
+
+          <button class="nav-btn active" onclick="showPage('home')" title="home">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span>Home</span>
+          </button>
+
+          <button class="nav-btn" onclick="showPage('logs')" title="logs">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span>Logs</span>
+          </button>
+
+          <button class="nav-btn" onclick="showPage('plants')" title="plants">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 22V12" />
+              <path d="M12 12C12 12 7 10 7 5a5 5 0 0110 0c0 5-5 7-5 7z" />
+              <path d="M12 12C12 12 17 10 17 5" />
+              <path d="M5 22h14" />
+            </svg>
+            <span>Plants</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="user-avatar">🧑‍💻</div>
+        </div>
+      </aside>
+
+      <!--  MAIN  -->
+      <div class="main">
+        <!-- TOPBAR -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <h1 class="topbar-title">Commit Garden</h1>
+            <div class="topbar-sub" id="statusQuote">Loading...</div>
+          </div>
+          <div class="topbar-right">
+            <div class="topbar-stat">
+              <span class="topbar-stat-label">Streak</span>
+              <span class="topbar-stat-value" id="streakTop">—</span>
+            </div>
+            <div class="topbar-stat">
+              <span class="topbar-stat-label">Best</span>
+              <span class="topbar-stat-value" id="bestTop">—</span>
+            </div>
+            <div class="topbar-stat">
+              <span class="topbar-stat-label">Commits</span>
+              <span class="topbar-stat-value" id="totalTop">—</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- PAGES -->
+        <div class="content">
+          <!-- HOME -->
+          <div id="page-home" class="page active">
+            <div class="home-grid">
+              <div class="home-left">
+                <!-- Today's entry -->
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="card-title">What did you learn today?</h2>
+                    <span class="card-date" id="todayDate"></span>
+                  </div>
+                  <textarea
+                    id="entry"
+                    placeholder="e.g. Built a Flask server, learned about Git hooks..."
+                  ></textarea>
+                  <button class="btn-commit" id="commitBtn">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 98 96"
+                      fill="#1a1a1a"
+                    >
+                      <path
+                        d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+                      />
+                    </svg>
+                    Commit & Water Plant
+                  </button>
+                </div>
+
+                <!-- Recent logs -->
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="card-title">Recent Logs</h2>
+                    <button class="btn-link" onclick="showPage('logs')">View all →</button>
+                  </div>
+                  <div id="recentLogs">
+                    <div class="empty-state">
+                      No logs yet. Make your first commit!
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Plant panel -->
+              <div class="home-right">
+                <div class="card plant-card">
+                  <div class="plant-display">
+                    <img id="plantImg" src="/svg?t=0" alt="Your plant" />
+                  </div>
+                  <div class="plant-info">
+                    <div class="plant-name-tag" id="plantName">—</div>
+                    <div class="plant-stage-bar">
+                      <div class="plant-stage-fill" id="stageFill"></div>
+                    </div>
+                    <div class="plant-stage-label" id="stageLabel">—</div>
+                  </div>
+                  <div
+                    class="daily-bonus"
+                    id="dailyBonus"
+                    style="display: none"
+                  ></div>
+                  <div class="plant-stats">
+                    <div class="plant-stat">
+                      <div class="plant-stat-value" id="streakRight">—</div>
+                      <div class="plant-stat-label">Day Streak</div>
+                    </div>
+                    <div class="plant-stat-divider"></div>
+                    <div class="plant-stat">
+                      <div class="plant-stat-value" id="bestRight">—</div>
+                      <div class="plant-stat-label">Best Streak</div>
+                    </div>
+                    <div class="plant-stat-divider"></div>
+                    <div class="plant-stat">
+                      <div class="plant-stat-value" id="totalRight">—</div>
+                      <div class="plant-stat-label">Total Commits</div>
+                    </div>
+                  </div>
+                  <div class="next-unlock" id="nextUnlock"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOGS -->
+          <div id="page-logs" class="page">
+            <div class="logs-header">
+              <h2 class="section-title">Log History</h2>
+            </div>
+            <div id="logsGrid" class="logs-grid">
+              <div class="empty-state">Loading logs...</div>
+            </div>
+          </div>
+
+          <!-- INFO -->
+          <div id="page-info" class="page">
+            <h2 class="section-title">How it works</h2>
+            <div class="card info-card" style="margin-top: 20px">
+              <div class="info-row">
+                <div class="info-label">🌱 What is Commit Garden?</div>
+                <div class="info-sub">
+                  A habit tracker for developers. Every time you commit code
+                  anywhere on this machine, your plant grows. Miss a day and it
+                  wilts.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">💧 How to water your plant</div>
+                <div class="info-sub">
+                  Type what you learned today and click Commit. It writes to
+                  your log, runs Git, updates the plant SVG, and pushes
+                  everything to GitHub automatically.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">🔥 Streak rules</div>
+                <div class="info-sub">
+                  Commit once per day to keep your streak alive. Committing
+                  multiple times in one day counts as one. Missing a day resets
+                  your streak to 1 and your plant wilts.
+                  <br /><br />
+                  Your streak is shown in the top bar as <strong>🔥 Xd</strong>.
+                  Best streak is tracked separately so you always know your
+                  record.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">⚡ Daily commit bonus</div>
+                <div class="info-sub">
+                  Committing more than once in a day unlocks a bonus badge on
+                  your plant panel:
+                  <br /><br />
+                  2 commits → ✨ Double tap!<br />
+                  3–4 commits → ⚡ Power Day!<br />
+                  5+ commits → 🔥 On Fire!
+                  <br /><br />
+                  The badge resets the next day.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">🌿 Plant unlocks</div>
+                <div class="info-sub">
+                  Day 1–5 &nbsp;&nbsp;→ Sprout 🌱<br />
+                  Day 6–10 &nbsp;→ Cactus 🌵<br />
+                  Day 11–20 → Tree 🌳<br />
+                  Day 21–29 → Cherry Blossom 🌸<br />
+                  Day 30+ &nbsp;&nbsp;→ Sunflower 🌻
+                  <br /><br />
+                  Each plant is shown in the Plants page with days remaining to
+                  unlock.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">🪝 Global Git hook</div>
+                <div class="info-sub">
+                  A post-commit hook is installed globally so committing in any
+                  repo on this machine automatically updates your garden — no
+                  need to open this app.
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">📁 Repository</div>
+                <div class="info-sub">
+                  commit-garden — all data lives in the
+                  <code>data/</code> folder. The SVG updates on every commit and
+                  is shown live in your GitHub README.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLANTS -->
+          <div id="page-plants" class="page">
+            <h2 class="section-title">Your Plants</h2>
+            <p class="section-sub" id="plantsSubtitle"></p>
+            <div class="plants-grid">
+              <div class="plant-showcase-card" id="showcase-sprout">
+                <div class="plant-showcase-badge unlocked">Current</div>
+                <div class="plant-showcase-img">
+                  <img
+                    src="/svg?t=0"
+                    alt="Sprout"
+                    style="width: 100px; height: 120px; object-fit: contain"
+                  />
+                </div>
+                <div class="plant-showcase-name">🌱 Sprout</div>
+                <div class="plant-showcase-desc">
+                  Your first plant. Grows from day 1 to day 5.
+                </div>
+                <div class="plant-showcase-unlock">Unlocked from Day 1</div>
+              </div>
+
+              <div class="plant-showcase-card locked" id="showcase-cactus">
+                <div class="plant-showcase-badge locked-badge">Day 6</div>
+                <div class="plant-showcase-img">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="120"
+                    viewBox="0 0 200 200"
+                  >
+                    <rect x="95" y="80" width="12" height="80" fill="#2e7d32" />
+                    <rect
+                      x="68"
+                      y="100"
+                      width="27"
+                      height="10"
+                      fill="#2e7d32"
+                    />
+                    <rect x="62" y="90" width="10" height="30" fill="#2e7d32" />
+                    <rect
+                      x="107"
+                      y="110"
+                      width="27"
+                      height="10"
+                      fill="#2e7d32"
+                    />
+                    <rect
+                      x="130"
+                      y="98"
+                      width="10"
+                      height="30"
+                      fill="#2e7d32"
+                    />
+                    <rect
+                      x="80"
+                      y="158"
+                      width="42"
+                      height="10"
+                      rx="4"
+                      fill="#795548"
+                    />
+                    <circle cx="100" cy="78" r="6" fill="#a5d6a7" />
+                  </svg>
+                </div>
+                <div class="plant-showcase-name">🌵 Cactus</div>
+                <div class="plant-showcase-desc">
+                  Tough and resilient. Unlocks when your streak hits 6 days.
+                </div>
+                <div class="plant-showcase-unlock" id="cactus-unlock">
+                  Unlocks at Day 6
+                </div>
+              </div>
+
+              <div class="plant-showcase-card locked" id="showcase-tree">
+                <div class="plant-showcase-badge locked-badge">Day 11</div>
+                <div class="plant-showcase-img">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="120"
+                    viewBox="0 0 200 200"
+                  >
+                    <rect
+                      x="94"
+                      y="130"
+                      width="14"
+                      height="50"
+                      fill="#5d4037"
+                    />
+                    <ellipse cx="100" cy="110" rx="35" ry="30" fill="#388e3c" />
+                    <ellipse cx="75" cy="125" rx="22" ry="18" fill="#43a047" />
+                    <ellipse cx="125" cy="125" rx="22" ry="18" fill="#43a047" />
+                    <ellipse cx="100" cy="90" rx="25" ry="22" fill="#66bb6a" />
+                    <rect
+                      x="72"
+                      y="178"
+                      width="58"
+                      height="10"
+                      rx="4"
+                      fill="#795548"
+                    />
+                  </svg>
+                </div>
+                <div class="plant-showcase-name">🌳 Tree</div>
+                <div class="plant-showcase-desc">
+                  Strong roots, full canopy. Unlocks at an 11 day streak.
+                </div>
+                <div class="plant-showcase-unlock" id="tree-unlock">
+                  Unlocks at Day 11
+                </div>
+              </div>
+
+              <div class="plant-showcase-card locked" id="showcase-blossom">
+                <div class="plant-showcase-badge locked-badge">Day 21</div>
+                <div class="plant-showcase-img">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="120"
+                    viewBox="0 0 200 200"
+                  >
+                    <rect
+                      x="94"
+                      y="130"
+                      width="14"
+                      height="50"
+                      fill="#5d4037"
+                    />
+                    <ellipse cx="100" cy="105" rx="38" ry="32" fill="#f8bbd0" />
+                    <ellipse cx="72" cy="122" rx="24" ry="18" fill="#f48fb1" />
+                    <ellipse cx="128" cy="122" rx="24" ry="18" fill="#f48fb1" />
+                    <ellipse cx="100" cy="88" rx="26" ry="20" fill="#fce4ec" />
+                    <circle cx="100" cy="100" r="8" fill="#ffeb3b" />
+                    <rect
+                      x="72"
+                      y="178"
+                      width="58"
+                      height="10"
+                      rx="4"
+                      fill="#795548"
+                    />
+                  </svg>
+                </div>
+                <div class="plant-showcase-name">🌸 Cherry Blossom</div>
+                <div class="plant-showcase-desc">
+                  The rarest plant. Only legends reach day 21.
+                </div>
+                <div class="plant-showcase-unlock" id="blossom-unlock">
+                  Unlocks at Day 21
+                </div>
+              </div>
+              <div class="plant-showcase-card locked" id="showcase-sunflower">
+                <div class="plant-showcase-badge locked-badge">Day 30</div>
+                <div class="plant-showcase-img">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="120"
+                    viewBox="0 0 200 200"
+                  >
+                    <rect
+                      x="94"
+                      y="110"
+                      width="14"
+                      height="60"
+                      fill="#5d4037"
+                    />
+                    <rect
+                      x="72"
+                      y="168"
+                      width="58"
+                      height="10"
+                      rx="4"
+                      fill="#795548"
+                    />
+                    <circle cx="100" cy="75" r="28" fill="#ffeb3b" />
+                    <circle cx="100" cy="75" r="16" fill="#8d4e00" />
+                    <ellipse cx="100" cy="42" rx="8" ry="14" fill="#ffeb3b" />
+                    <ellipse cx="100" cy="108" rx="8" ry="14" fill="#ffeb3b" />
+                    <ellipse cx="67" cy="75" rx="14" ry="8" fill="#ffeb3b" />
+                    <ellipse cx="133" cy="75" rx="14" ry="8" fill="#ffeb3b" />
+                    <ellipse
+                      cx="77"
+                      cy="52"
+                      rx="8"
+                      ry="14"
+                      fill="#ffeb3b"
+                      transform="rotate(-45 77 52)"
+                    />
+                    <ellipse
+                      cx="123"
+                      cy="52"
+                      rx="8"
+                      ry="14"
+                      fill="#ffeb3b"
+                      transform="rotate(45 123 52)"
+                    />
+                    <ellipse
+                      cx="77"
+                      cy="98"
+                      rx="8"
+                      ry="14"
+                      fill="#ffeb3b"
+                      transform="rotate(45 77 98)"
+                    />
+                    <ellipse
+                      cx="123"
+                      cy="98"
+                      rx="8"
+                      ry="14"
+                      fill="#ffeb3b"
+                      transform="rotate(-45 123 98)"
+                    />
+                  </svg>
+                </div>
+                <div class="plant-showcase-name">🌻 Sunflower</div>
+                <div class="plant-showcase-desc">
+                  The ultimate plant. Only the most dedicated reach day 30.
+                </div>
+                <div class="plant-showcase-unlock" id="sunflower-unlock">
+                  Unlocks at Day 30
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/constants.js"></script>
+    <script src="/helpers.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
