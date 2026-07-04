@@ -35,7 +35,11 @@
             <span>Info</span>
           </button>
 
-          <button class="nav-btn active" onclick="showPage('home')" title="home">
+          <button
+            class="nav-btn active"
+            onclick="showPage('home')"
+            title="home"
+          >
             <svg
               width="20"
               height="20"
@@ -149,7 +153,9 @@
                 <div class="card">
                   <div class="card-header">
                     <h2 class="card-title">Recent Logs</h2>
-                    <button class="btn-link" onclick="showPage('logs')">View all →</button>
+                    <button class="btn-link" onclick="showPage('logs')">
+                      View all →
+                    </button>
                   </div>
                   <div id="recentLogs">
                     <div class="empty-state">
@@ -213,11 +219,12 @@
           <div id="page-info" class="page">
             <h2 class="section-title">How it works</h2>
             <div class="card info-card" style="margin-top: 20px">
+
               <div class="info-row">
                 <div class="info-label">🌱 What is Commit Garden?</div>
                 <div class="info-sub">
                   A habit tracker for developers. Every time you commit code
-                  anywhere on this machine, your plant grows. Miss a day and it
+                  inside this project, your plant grows. Miss a day and it
                   wilts.
                 </div>
               </div>
@@ -276,7 +283,7 @@
                 <div class="info-label">🪝 Git hook</div>
                 <div class="info-sub">
                   A post-commit Git hook runs automatically after every commit
-                  inside this repo, updating your garden behind the scenes. 
+                  inside this repo, updating your garden behind the scenes.
                 </div>
               </div>
 
