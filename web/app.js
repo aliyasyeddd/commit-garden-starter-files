@@ -53,11 +53,7 @@ function updatePlantsPage(streak) {
   document.getElementById('plantsSubtitle').textContent =
     `Current streak: ${streak} days — keep going to unlock more plants`;
 
-  const unlocks = [
-    { id: 'cactus',  day: 6,  unlockEl: 'cactus-unlock'  },
-    { id: 'tree',    day: 11, unlockEl: 'tree-unlock'     },
-    { id: 'blossom', day: 21, unlockEl: 'blossom-unlock'  },
-  ];
+  const unlocks = PLANT_UNLOCKS;
 
   unlocks.forEach(({ id, day, unlockEl }) => {
     const card    = document.getElementById('showcase-' + id);
@@ -73,6 +69,20 @@ function updatePlantsPage(streak) {
       labelEl.textContent = `${day - streak} days to go`;
     }
   });
+
+  // Show live SVG for current plant
+  const currentPlant = streak >= 30 ? 'sunflower'
+    : streak >= 21 ? 'blossom'
+    : streak >= 11 ? 'tree'
+    : streak >= 6  ? 'cactus'
+    : 'sprout';
+
+
+  const currentCard = document.getElementById('showcase-' + currentPlant);
+  if (currentCard) {
+    const imgContainer = currentCard.querySelector('.plant-showcase-img');
+    imgContainer.innerHTML = `<img src="/svg?t=${Date.now()}" alt="Current plant" style="width:100px; height:120px; object-fit:contain;" />`;
+  } 
 
   const sproutBadge = document.querySelector('#showcase-sprout .plant-showcase-badge');
   sproutBadge.textContent = streak >= 6 ? 'Completed' : 'Current';
