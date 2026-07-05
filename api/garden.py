@@ -44,10 +44,6 @@ def update_streak(garden):
     last = garden.get("last_commit_date")
 
     # --- new-day reset for daily_commits (NEW in "after") ---
-    # TODO: if last != today, reset garden["daily_commits"] = 0
-    # TODO: increment garden["daily_commits"] += 1 regardless of branch below
-    # NOTE: same-day short circuit below must come AFTER this, since
-    # daily_commits needs to update even on repeat commits same day.
 
     if last == today:
         return garden
@@ -64,10 +60,6 @@ def update_streak(garden):
 
     garden["last_commit_date"] = today
     garden["total_commits"] = garden.get("total_commits", 0) + 1
-
-    # TODO: garden["plant_stage"] = garden["streak"]   (was min(streak, 5) before —
-    #       now plant TYPE handles capping via get_plant_type, not plant_stage)
-    # TODO: garden["best_streak"] = max(garden.get("best_streak", 0), garden["streak"])  (NEW)
 
     return garden
 
