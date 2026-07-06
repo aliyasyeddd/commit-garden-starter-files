@@ -15,9 +15,7 @@ DEFAULT_GARDEN = {
     "last_commit_date": None,
     "plant_stage": 0,
     "wilting": False,
-    "total_commits": 0,
-    "best_streak": 0,
-    "daily_commits": 0
+    "total_commits": 0
 }
 
 
